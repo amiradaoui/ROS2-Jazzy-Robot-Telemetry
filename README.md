@@ -1,22 +1,42 @@
-# ROS 2 Digital Twin & Real-time Telemetry Visualizer
+# 🤖 Mini Sentinel: ROS 2 Telemetry & Visualization
 
-This project demonstrates a professional implementation of a **Digital Twin** visualization system using **ROS 2 Jazzy** and **Rviz2**. It focuses on the communication between a robot's physical model and its live data status.
+## 📝 Project Goal
+The **Mini Sentinel** project is designed for the **ROS 2 Jazzy** environment. Its primary purpose is to demonstrate a real-time robot monitoring system (Telemetry). 
 
-## 🚀 Overview
-The system consists of a custom-designed robot (URDF) and a Python-based telemetry node. Instead of monitoring raw data in the terminal, this project visualizes robot health/status using **Dynamic Markers** in a 3D environment.
+The system consists of a custom-designed robot (URDF) and a central logic unit (Brain Node) that broadcasts the robot's status into a 3D environment. This is essential for debugging and monitoring robots in industrial or research settings.
 
-## 🛠 Features
-- **URDF Modeling:** A clean, organized robot description.
-- **Custom Telemetry Node:** A Python node that broadcasts `visualization_msgs/Marker` to reflect real-time status.
-- **Rviz2 Integration:** Leverages the power of Rviz for data visualization rather than heavy simulation.
-- **VirtualBox Optimized:** Designed to run efficiently in virtualized environments by prioritizing Rviz over Gazebo.
+---
 
-## 📁 Project Structure
-- `urdf/robot.urdf`: The physical description of the robot.
-- `mini_sentinel/brain_node.py`: The Python node logic for broadcasting telemetry data.
-- `setup.py` & `package.xml`: Standard ROS 2 configuration for easy deployment.
+## 📸 Final Visualization
+Below is the real-time telemetry output from RViz2, showing the robot model synchronized with the status markers.
 
-## 💻 How to Run
-1. **Launch the Visualizer:**
-   ```bash
-   ros2 launch urdf_tutorial display.launch.py model:=$(pwd)/src/mini_sentinel/urdf/robot.urdf
+![Robot Telemetry Final](./images/robot_telemetry_final.png)
+
+---
+
+## 🚀 Step-by-Step Execution Guide
+
+### 1. Build the Workspace
+Open your terminal and build the project to register all components:
+```bash
+cd ~/ros2_ws
+colcon build --packages-select mini_sentinel
+source install/setup.bash
+
+### 2. Run the Telemetry Node
+Launch the "Brain" of the robot to start publishing data:
+```bash
+ros2 run mini_sentinel brain_node
+
+### 3.Launch Visualization (RViz2)
+In a new terminal, run:
+rviz2
+
+### 4.Configuration for RViz2
+To see the results as shown in the screenshot:
+
+    Set Fixed Frame to base_link.
+
+    Add RobotModel and set Description Source to File, then select robot.urdf.
+
+    Add Marker and subscribe to the /robot_status topic.
