@@ -22,12 +22,12 @@ Open your terminal and build the project to register all components:
 cd ~/ros2_ws
 colcon build --packages-select mini_sentinel
 source install/setup.bash
-
+````
 ### 2. Run the Telemetry Node
 Launch the "Brain" of the robot to start publishing data:
 ```bash
 ros2 run mini_sentinel brain_node
-
+````
 ### 3.Launch Visualization (RViz2)
 In a new terminal, run:
 rviz2
